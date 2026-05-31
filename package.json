@@ -1,29 +1,24 @@
 {
-“name”: “workspace”,
-“version”: “0.0.0”,
-“license”: “MIT”,
-“type”: “module”,
-“scripts”: {
-“dev”: “node –experimental-strip-types index.ts”,
-“build”: “npm run typecheck && npm run build –workspaces –if-present”,
-“typecheck:libs”: “tsc –build”,
-“typecheck”: “npm run typecheck:libs && npm run typecheck –workspaces –if-present”
-},
-“private”: true,
-“devDependencies”: {
-“prettier”: “^3.8.3”,
-“typescript”: “~5.9.3”,
+  "name": "workspace",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
 
-"esbuild": "^0.27.3",
-"vite": "^8.0.0",
-"@vitejs/plugin-react": "^5.0.0",
-"@tailwindcss/vite": "^4.0.0",
-"@replit/vite-plugin-runtime-error-modal": "^3.0.0",
-"@replit/vite-plugin-cartographer": "^3.0.0",
-"@replit/vite-plugin-dev-banner": "^3.0.0"
+  "scripts": {
+    "dev": "node --experimental-strip-types index.ts",
+    "start": "node --experimental-strip-types index.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
 
-},
-“overrides”: {
-“esbuild”: “0.27.3”
-}
+  "devDependencies": {
+    "prettier": "^3.8.3",
+    "typescript": "~5.9.3",
+    "ts-node": "^10.9.2"
+  },
+
+  "overrides": {
+    "esbuild": "0.27.3"
+  }
 }
