@@ -4,20 +4,23 @@
   "license": "MIT",
   "type": "module",
   "private": true,
-
   "scripts": {
-    "dev": "node --experimental-strip-types index.ts",
-    "start": "node --experimental-strip-types index.ts",
-    "build": "tsc",
-    "typecheck": "tsc --noEmit"
-  },
+    "dev": "npm run dev:api & npm run dev:web",
 
+    "dev:api": "npm --workspace @workspace/api-server run dev",
+    "dev:web": "npm --workspace @workspace/staff-app run dev",
+
+    "build": "npm run build:api && npm run build:web",
+
+    "build:api": "npm --workspace @workspace/api-server run build",
+    "build:web": "npm --workspace @workspace/staff-app run build",
+
+    "typecheck": "tsc -b"
+  },
   "devDependencies": {
-    "prettier": "^3.8.3",
     "typescript": "~5.9.3",
-    "ts-node": "^10.9.2"
+    "prettier": "^3.8.3"
   },
-
   "overrides": {
     "esbuild": "0.27.3"
   }
