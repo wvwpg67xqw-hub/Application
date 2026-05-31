@@ -1,9 +1,11 @@
 import { pgTable, serial, text, boolean, timestamp, json, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
+import { serversTable } from "./servers";
 
 export const positionsTable = pgTable("positions", {
   id: serial("id").primaryKey(),
+  serverId: integer("server_id").references(() => serversTable.id),
   name: text("name").notNull(),
   description: text("description").notNull(),
   isOpen: boolean("is_open").notNull().default(true),

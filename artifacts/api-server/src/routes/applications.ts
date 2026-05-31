@@ -110,7 +110,7 @@ applicationsRouter.post("/", requireAuth, async (req, res) => {
   sendApplicationEmbed(
     app.id,
     { username: user.username, displayName: user.displayName, discordId: user.discordId, avatar: user.avatar },
-    { name: position.name },
+    { name: position.name, serverId: position.serverId },
     answers,
     position.questions as string[]
   ).catch((err) => logger.error({ err }, "Failed to send application embed"));

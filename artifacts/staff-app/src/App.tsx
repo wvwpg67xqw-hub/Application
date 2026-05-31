@@ -1,12 +1,12 @@
-import { Switch, Route, Router as WouterRouter, Redirect, useLocation } from "wouter";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { Switch, Route, Router as WouterRouter, Redirect } from "wouter";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getGetMeQueryKey, useGetMe } from "@workspace/api-client-react";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Dashboard from "@/pages/dashboard";
-import Apply from "@/pages/apply";
+import ApplyServer from "@/pages/apply-server";
 import ApplyPosition from "@/pages/apply-position";
 import ApplicationDetail from "@/pages/application-detail";
 import AdminDashboard from "@/pages/admin/dashboard";
@@ -52,11 +52,11 @@ function Router() {
       <Route path="/dashboard">
         <ProtectedRoute component={Dashboard} />
       </Route>
-      <Route path="/apply">
-        <ProtectedRoute component={Apply} />
-      </Route>
-      <Route path="/apply/:id">
+      <Route path="/apply/:guildId/:positionId">
         <ProtectedRoute component={ApplyPosition} />
+      </Route>
+      <Route path="/apply/:guildId">
+        <ProtectedRoute component={ApplyServer} />
       </Route>
       <Route path="/applications/:id">
         <ProtectedRoute component={ApplicationDetail} />

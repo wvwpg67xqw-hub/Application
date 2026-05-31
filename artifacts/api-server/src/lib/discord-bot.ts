@@ -1,4 +1,8 @@
-import { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Events } from "discord.js";
+import {
+  Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder,
+  ButtonStyle, Events, REST, Routes, SlashCommandBuilder, PermissionFlagsBits,
+  ChannelType,
+} from "discord.js";
 import { db } from "@workspace/db";
 import { applicationsTable, usersTable, positionsTable, serversTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
@@ -12,6 +16,8 @@ export function getDiscordClient(): Client | null {
 
 export async function initDiscordBot(): Promise<void> {
   const token = process.env.DISCORD_BOT_TOKEN;
+  const clientId = process.env.DISCORD_CLIENT_ID;
+
   if (!token) {
     logger.warn("DISCORD_BOT_TOKEN not set — Discord bot disabled");
     return;
@@ -21,18 +27,77 @@ export async function initDiscordBot(): Promise<void> {
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
   });
 
-  client.on(Events.ClientReady, (c) => {
+  client.on(Events.ClientReady, async (c) => {
     logger.info({ tag: c.user.tag }, "Discord bot logged in");
+
+    // Register /setup slash command globally
+    if (clientId) {
+      try {
+        const rest = new REST().setToken(token);
+        const command = new SlashCommandBuilder()
+          .setName("setup")
+          .setDescription("Set this channel as the staff application review channel for this server")
+          .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild);
+
+        await rest.put(Routes.applicationCommands(clientId), {
+          body: [command.toJSON()],
+        });
+        logger.info("Registered /setup slash command globally");
+      } catch (err) {
+        logger.error({ err }, "Failed to register slash commands");
+      }
+    }
   });
 
   client.on(Events.InteractionCreate, async (interaction) => {
+    // Handle /setup command
+    if (interaction.isChatInputCommand() && interaction.commandName === "setup") {
+      const guildId = interaction.guildId;
+      if (!guildId) {
+        await interaction.reply({ content: "This command can only be used in a server.", ephemeral: true });
+        return;
+      }
+
+      const channelId = interaction.channelId;
+
+      try {
+        const [existing] = await db.select().from(serversTable).where(eq(serversTable.guildId, guildId));
+
+        if (existing) {
+          await db
+            .update(serversTable)
+            .set({ reviewChannelId: channelId, updatedAt: new Date() })
+            .where(eq(serversTable.guildId, guildId));
+        } else {
+          const guild = interaction.guild;
+          await db.insert(serversTable).values({
+            guildId,
+            serverName: guild?.name || "Unknown Server",
+            serverLogo: guild?.iconURL() || null,
+            reviewChannelId: channelId,
+          });
+        }
+
+        await interaction.reply({
+          content: `✅ **Setup complete!** This channel (<#${channelId}>) will now receive staff application notifications for **${interaction.guild?.name}**.`,
+          ephemeral: true,
+        });
+        logger.info({ guildId, channelId }, "/setup: review channel configured");
+      } catch (err) {
+        logger.error({ err }, "/setup: failed to save config");
+        await interaction.reply({ content: "❌ Failed to save configuration. Please try again.", ephemeral: true });
+      }
+      return;
+    }
+
+    // Handle Accept/Deny/Review buttons
     if (!interaction.isButton()) return;
 
     const [action, appIdStr] = interaction.customId.split("_");
     const appId = parseInt(appIdStr, 10);
     if (!appId || isNaN(appId)) return;
 
-    const newStatus = action === "accept" ? "accepted" : action === "deny" ? "denied" : null;
+    const newStatus = action === "accept" ? "accepted" : action === "deny" ? "denied" : action === "review" ? "under_review" : null;
     if (!newStatus) return;
 
     try {
@@ -51,15 +116,15 @@ export async function initDiscordBot(): Promise<void> {
         return;
       }
 
-      // Auto-role on accept
       if (newStatus === "accepted") {
         await assignRole(app.positionId, app.userId);
       }
 
-      // Send DM to applicant
       await sendDecisionDM(app.userId, newStatus, app.positionId, interaction.user.tag);
 
-      const statusLabel = newStatus === "accepted" ? "✅ Accepted" : "❌ Denied";
+      const statusLabel =
+        newStatus === "accepted" ? "✅ Accepted" : newStatus === "denied" ? "❌ Denied" : "🔍 Under Review";
+
       await interaction.update({
         content: `**${statusLabel}** by ${interaction.user.tag}`,
         components: [],
@@ -76,16 +141,16 @@ export async function initDiscordBot(): Promise<void> {
 async function assignRole(positionId: number, userId: number): Promise<void> {
   if (!client) return;
 
-  const guildId = process.env.DISCORD_GUILD_ID;
-  if (!guildId) return;
-
   try {
     const [position] = await db.select().from(positionsTable).where(eq(positionsTable.id, positionId));
     const [user] = await db.select().from(usersTable).where(eq(usersTable.id, userId));
 
-    if (!position?.discordRoleId || !user?.discordId) return;
+    if (!position?.discordRoleId || !user?.discordId || !position.serverId) return;
 
-    const guild = await client.guilds.fetch(guildId);
+    const [server] = await db.select().from(serversTable).where(eq(serversTable.id, position.serverId));
+    if (!server?.guildId) return;
+
+    const guild = await client.guilds.fetch(server.guildId);
     const member = await guild.members.fetch(user.discordId);
     await member.roles.add(position.discordRoleId);
     logger.info({ discordId: user.discordId, roleId: position.discordRoleId }, "Role assigned");
@@ -105,13 +170,16 @@ async function sendDecisionDM(userId: number, status: string, positionId: number
 
     const discordUser = await client.users.fetch(user.discordId);
     const isAccepted = status === "accepted";
+    const isUnderReview = status === "under_review";
 
     const embed = new EmbedBuilder()
-      .setColor(isAccepted ? 0x3ba55c : 0xed4245)
-      .setTitle(isAccepted ? "Application Accepted!" : "Application Update")
+      .setColor(isAccepted ? 0x3ba55c : isUnderReview ? 0x5865f2 : 0xed4245)
+      .setTitle(isAccepted ? "Application Accepted!" : isUnderReview ? "Application Under Review" : "Application Update")
       .setDescription(
         isAccepted
           ? `Congratulations! Your application for **${position.name}** has been **accepted**. Welcome to the team!`
+          : isUnderReview
+          ? `Your application for **${position.name}** is now **under review**. We'll be in touch soon!`
           : `Your application for **${position.name}** has been **denied**. Thank you for applying.`
       )
       .addFields({ name: "Reviewed by", value: reviewerTag })
@@ -126,15 +194,24 @@ async function sendDecisionDM(userId: number, status: string, positionId: number
 export async function sendApplicationEmbed(
   applicationId: number,
   applicant: { username: string; displayName: string; discordId: string; avatar: string | null },
-  position: { name: string },
+  position: { name: string; serverId: number | null },
   answers: Record<string, string>,
   questions: string[]
 ): Promise<void> {
   if (!client) return;
 
-  const channelId = process.env.DISCORD_REVIEW_CHANNEL_ID;
+  // Look up this server's review channel from DB
+  let channelId: string | null = null;
+  if (position.serverId) {
+    const [server] = await db.select().from(serversTable).where(eq(serversTable.id, position.serverId));
+    channelId = server?.reviewChannelId || null;
+  }
+
+  // Fall back to env var for backwards compatibility
+  if (!channelId) channelId = process.env.DISCORD_REVIEW_CHANNEL_ID || null;
+
   if (!channelId) {
-    logger.warn("DISCORD_REVIEW_CHANNEL_ID not set — skipping embed");
+    logger.warn({ applicationId }, "No review channel configured for this server — skipping embed");
     return;
   }
 
@@ -184,14 +261,14 @@ export async function sendApplicationEmbed(
   }
 }
 
-export async function checkGuildMembership(discordId: string): Promise<boolean> {
-  if (!client) return true; // permissive if bot not running
+export async function checkGuildMembership(discordId: string, guildId?: string): Promise<boolean> {
+  if (!client) return true;
 
-  const guildId = process.env.DISCORD_GUILD_ID;
-  if (!guildId) return true;
+  const targetGuildId = guildId || process.env.DISCORD_GUILD_ID;
+  if (!targetGuildId) return true;
 
   try {
-    const guild = await client.guilds.fetch(guildId);
+    const guild = await client.guilds.fetch(targetGuildId);
     await guild.members.fetch(discordId);
     return true;
   } catch {

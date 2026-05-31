@@ -6,11 +6,12 @@ import { useState } from "react";
 import { ArrowLeft, Send, AlertCircle } from "lucide-react";
 
 export default function ApplyPosition() {
-  const params = useParams<{ id: string }>();
-  const id = parseInt(params.id, 10);
+  const params = useParams<{ guildId: string; positionId: string }>();
+  const positionId = parseInt(params.positionId, 10);
+  const { guildId } = params;
   const [, navigate] = useLocation();
   const queryClient = useQueryClient();
-  const { data: position, isLoading } = useGetPosition(id, { query: { queryKey: getGetPositionQueryKey(id), enabled: !!id } });
+  const { data: position, isLoading } = useGetPosition(positionId, { query: { queryKey: getGetPositionQueryKey(positionId), enabled: !!positionId } });
   const createMutation = useCreateApplication();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +29,7 @@ export default function ApplyPosition() {
     }
 
     createMutation.mutate(
-      { data: { positionId: id, answers } },
+      { data: { positionId, answers } },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: getListMyApplicationsQueryKey() });
@@ -41,6 +42,8 @@ export default function ApplyPosition() {
       }
     );
   };
+
+  const backPath = guildId ? `/apply/${guildId}` : "/dashboard";
 
   if (isLoading) {
     return (
@@ -72,7 +75,7 @@ export default function ApplyPosition() {
     <Layout>
       <div className="p-6 max-w-2xl mx-auto">
         <button
-          onClick={() => navigate("/apply")}
+          onClick={() => navigate(backPath)}
           className="flex items-center gap-2 text-[#B9BBBE] hover:text-white transition-colors mb-6 text-sm"
         >
           <ArrowLeft size={16} />
