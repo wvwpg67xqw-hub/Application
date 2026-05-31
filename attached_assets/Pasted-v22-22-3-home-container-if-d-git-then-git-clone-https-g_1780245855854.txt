@@ -1,0 +1,45 @@
+v22.22.3
+:/home/container$ if [ ! -d .git ]; then git clone https://github.com/wvwpg67xqw-hub/Application .; fi; if [[ "${AUTO_UPDATE}" == "1" ]]; then git pull; fi; if [ -f /home/container/package.json ]; then npm install; fi; npm install -g ts-node typescript || true; if [ -f /home/container/index.ts ]; then ts-node --esm index.ts; elif [ -f /home/container/src/index.ts ]; then ts-node --esm src/index.ts; else node index.js; fi # Added by FeatherPanel (Server Startup)
+remote: Enumerating objects: 8, done.[K
+remote: Counting objects:  12% (1/8)[Kremote: Counting objects:  25% (2/8)[Kremote: Counting objects:  37% (3/8)[Kremote: Counting objects:  50% (4/8)[Kremote: Counting objects:  62% (5/8)[Kremote: Counting objects:  75% (6/8)[Kremote: Counting objects:  87% (7/8)[Kremote: Counting objects: 100% (8/8)[Kremote: Counting objects: 100% (8/8), done.[K
+remote: Compressing objects:  50% (1/2)[Kremote: Compressing objects: 100% (2/2)[Kremote: Compressing objects: 100% (2/2), done.[K
+remote: Total 5 (delta 3), reused 5 (delta 3), pack-reused 0 (from 0)[K
+Unpacking objects:  20% (1/5)Unpacking objects:  40% (2/5)Unpacking objects:  60% (3/5)Unpacking objects:  80% (4/5)Unpacking objects: 100% (5/5)Unpacking objects: 100% (5/5), 3.12 KiB | 639.00 KiB/s, done.
+From https://github.com/wvwpg67xqw-hub/Application
+   3fb9077..e808094  main       -> origin/main
+Updating 3fb9077..e808094
+Fast-forward
+ ...-d-git-then-git-clone-https-g_1780245668795.txt | 100 [32m+++++++++++++++++++++[m
+ index.ts                                           |  17 [32m+++[m[31m-[m
+ 2 files changed, 116 insertions(+), 1 deletion(-)
+ create mode 100644 attached_assets/Pasted-v22-22-3-home-container-if-d-git-then-git-clone-https-g_1780245668795.txt
+\[1G[0K|[1G[0K/[1G[0K-[1G[0K
+up to date, audited 3 packages in 2s
+-[1G[0K
+-[1G[0K1 package is looking for funding
+-[1G[0K  run `npm fund` for details
+-[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K[1mnpm[22m [31merror[39m [94mcode[39m EROFS
+/[1G[0K[1mnpm[22m [31merror[39m [94msyscall[39m rename
+/[1G[0K[1mnpm[22m [31merror[39m [94mpath[39m /usr/local/lib/node_modules/ts-node
+/[1G[0K[1mnpm[22m [31merror[39m [94mdest[39m /usr/local/lib/node_modules/.ts-node-6zHekdFC
+/[1G[0K[1mnpm[22m [31merror[39m [94merrno[39m [33m-30[39m
+/[1G[0K[1mnpm[22m [31merror[39m [94mrofs[39m EROFS: read-only file system, rename '/usr/local/lib/node_modules/ts-node' -> '/usr/local/lib/node_modules/.ts-node-6zHekdFC'
+/[1G[0K[1mnpm[22m [31merror[39m [94mrofs[39m Often virtualized file systems, or other file systems that don't support symlinks, give this error.
+/[1G[0K[1mnpm[22m [31merror[39m A complete log of this run can be found in: /home/container/.npm/_logs/2026-05-31T16_42_38_614Z-debug-0.log
+/[1G[0K(node:57) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1mStarting Plain Promotions Staff App...[0m
+
+[1m[36m[api][0m Installing dependencies in artifacts/api-server...
+\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K[1mnpm[22m [33mwarn[39m [94mdeprecated[39m passport-discord@0.1.4: This package is no longer maintained. Please consider migrating to a maintained alternative, (following packages are author unvetted) such as: discord-strategy, passport-discord-auth, ...
+\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K
+added 180 packages, and audited 181 packages in 52s
+-[1G[0K
+-[1G[0K42 packages are looking for funding
+-[1G[0K  run `npm fund` for details
+-[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+-[1G[0K[1m[36m[api][0m Dependencies installed.
+[1m[35m[web][0m Installing dependencies in artifacts/staff-app...
