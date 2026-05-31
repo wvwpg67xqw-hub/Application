@@ -1,0 +1,100 @@
+-[1G[0K1 package is looking for funding
+-[1G[0K  run `npm fund` for details
+-[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K[1mnpm[22m [31merror[39m [94mcode[39m EROFS
+|[1G[0K[1mnpm[22m [31merror[39m [94msyscall[39m rename
+|[1G[0K[1mnpm[22m [31merror[39m [94mpath[39m /usr/local/lib/node_modules/ts-node
+|[1G[0K[1mnpm[22m [31merror[39m [94mdest[39m /usr/local/lib/node_modules/.ts-node-6zHekdFC
+|[1G[0K[1mnpm[22m [31merror[39m [94merrno[39m [33m-30[39m
+|[1G[0K[1mnpm[22m [31merror[39m [94mrofs[39m EROFS: read-only file system, rename '/usr/local/lib/node_modules/ts-node' -> '/usr/local/lib/node_modules/.ts-node-6zHekdFC'
+|[1G[0K[1mnpm[22m [31merror[39m [94mrofs[39m Often virtualized file systems, or other file systems that don't support symlinks, give this error.
+|[1G[0K[1mnpm[22m [31merror[39m A complete log of this run can be found in: /home/container/.npm/_logs/2026-05-31T16_47_30_193Z-debug-0.log
+|[1G[0K(node:54) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1mStarting Plain Promotions Staff App...[0m
+
+[1m[36m[api][0m Installing dependencies in artifacts/api-server...
+\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K
+up to date, audited 181 packages in 2s
+|[1G[0K
+|[1G[0K42 packages are looking for funding
+|[1G[0K  run `npm fund` for details
+|[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+|[1G[0K[1m[36m[api][0m Dependencies installed.
+[1m[35m[web][0m Installing dependencies in artifacts/staff-app...
+\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K
+up to date, audited 245 packages in 3s
+\[1G[0K
+\[1G[0K22 packages are looking for funding
+\[1G[0K  run `npm fund` for details
+\[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+\[1G[0K[1m[35m[web][0m Dependencies installed.
+[1m[36m[api][0m > @workspace/api-server@0.0.0 dev
+[1m[36m[api][0m > NODE_ENV=development npm run build && npm run start
+[1m[35m[web][0m > @workspace/staff-app@0.0.0 dev
+[1m[35m[web][0m > npx vite --config vite.config.ts --host 0.0.0.0
+[1m[36m[api][0m > @workspace/api-server@0.0.0 build
+[1m[36m[api][0m > node ./build.mjs
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-orm/node-postgres"
+[1m[36m[api][0m     ../../lib/db/src/index.ts:1:24:
+[1m[36m[api][0m       1 │ import { drizzle } from "drizzle-orm/node-postgres";
+[1m[36m[api][0m         ╵                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-orm/node-postgres" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "pg"
+[1m[36m[api][0m     ../../lib/db/src/index.ts:2:15:
+[1m[36m[api][0m       2 │ import pg from "pg";
+[1m[36m[api][0m         ╵                ~~~~
+[1m[36m[api][0m   You can mark the path "pg" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-orm/pg-core"
+[1m[36m[api][0m     ../../lib/db/src/schema/servers.ts:1:49:
+[1m[36m[api][0m       1 │ ...rt { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+[1m[36m[api][0m         ╵                                                 ~~~~~~~~~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-orm/pg-core" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-orm/pg-core"
+[1m[36m[api][0m     ../../lib/db/src/schema/sessions.ts:1:47:
+[1m[36m[api][0m       1 │ import { pgTable, text, timestamp, json } from "drizzle-orm/pg-core";
+[1m[36m[api][0m         ╵                                                ~~~~~~~~~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-orm/pg-core" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-orm/pg-core"
+[1m[36m[api][0m     ../../lib/db/src/schema/users.ts:1:67:
+[1m[36m[api][0m       1 │ ...al, text, boolean, timestamp, varchar } from "drizzle-orm/pg-core";
+[1m[36m[api][0m         ╵                                                 ~~~~~~~~~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-orm/pg-core" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-orm/pg-core"
+[1m[36m[api][0m     ../../lib/db/src/schema/positions.ts:1:73:
+[1m[36m[api][0m       1 │ ...xt, boolean, timestamp, json, integer } from "drizzle-orm/pg-core";
+[1m[36m[api][0m         ╵                                                 ~~~~~~~~~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-orm/pg-core" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-orm/pg-core"
+[1m[36m[api][0m     ../../lib/db/src/schema/applications.ts:1:82:
+[1m[36m[api][0m       1 │ ...an, timestamp, json, integer, varchar } from "drizzle-orm/pg-core";
+[1m[36m[api][0m         ╵                                                 ~~~~~~~~~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-orm/pg-core" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "zod"
+[1m[36m[api][0m     ../../lib/api-zod/src/generated/api.ts:8:21:
+[1m[36m[api][0m       8 │ import * as zod from 'zod';
+[1m[36m[api][0m         ╵                      ~~~~~
+[1m[36m[api][0m   You can mark the path "zod" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-zod"
+[1m[36m[api][0m     ../../lib/db/src/schema/servers.ts:2:35:
+[1m[36m[api][0m       2 │ import { createInsertSchema } from "drizzle-zod";
+[1m[36m[api][0m         ╵                                    ~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-zod" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-zod"
+[1m[36m[api][0m     ../../lib/db/src/schema/applications.ts:2:35:
+[1m[36m[api][0m       2 │ import { createInsertSchema } from "drizzle-zod";
+[1m[36m[api][0m         ╵                                    ~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-zod" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-zod"
+[1m[36m[api][0m     ../../lib/db/src/schema/positions.ts:2:35:
+[1m[36m[api][0m       2 │ import { createInsertSchema } from "drizzle-zod";
+[1m[36m[api][0m         ╵                                    ~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-zod" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+[1m[36m[api][0m ✘ [ERROR] Could not resolve "drizzle-zod"
+[1m[36m[api][0m     ../../lib/db/src/schema/users.ts:2:35:
+[1m[36m[api][0m       2 │ import { createInsertSchema } from "drizzle-zod";
+[1m[36m[api][0m         ╵                                    ~~~~~~~~~~~~~
+[1m[36m[api][0m   You can mark the path "drizzle-zod" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
