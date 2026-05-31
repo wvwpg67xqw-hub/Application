@@ -1,0 +1,213 @@
+Build a professional Discord Staff Application Website with a modern Discord-inspired dark theme.
+
+Server Logo:
+https://cdn.discordapp.com/icons/1487744336908124190/4235733b69bbdcb75e2479404e2eaaa1.webp?size=3072
+
+Purpose:
+This website allows users to apply for staff positions in a Discord server.
+
+Available Positions:
+- Moderator
+- HR
+- Partnership Manager
+
+The website must support multiple Discord servers. Each server can customize:
+- Server Name
+- Server Logo
+- Application Questions
+- Discord Role IDs
+- Staff Review Channel
+
+==================================================
+AUTHENTICATION
+==================================================
+
+Use Discord OAuth2 Login.
+
+Store:
+- Discord ID
+- Username
+- Avatar
+- Server Membership Status
+
+Only members of the Discord server can apply.
+
+==================================================
+APPLICATION SYSTEM
+==================================================
+
+Users can select:
+
+1. Moderator
+2. HR
+3. Partnership Manager
+
+Each application should have:
+
+- Why do you want this position?
+- What experience do you have?
+- How active are you?
+- What are your strengths?
+- What are your weaknesses?
+- Additional Information
+
+Applications are saved to the database.
+
+==================================================
+APPLICATION STATUS
+==================================================
+
+Users can view:
+
+- Pending
+- Under Review
+- Accepted
+- Denied
+
+Users can see staff notes if enabled.
+
+==================================================
+DISCORD BOT INTEGRATION
+==================================================
+
+When an application is submitted:
+
+Send an embed to a configured Discord review channel.
+
+Embed includes:
+- Applicant
+- Position
+- Answers
+- Discord ID
+- Submission Time
+
+Buttons:
+- Accept
+- Deny
+
+==================================================
+AUTO ROLE SYSTEM
+==================================================
+
+When accepted:
+
+Automatically give the correct Discord role.
+
+Examples:
+- Moderator Applicant → Moderator Role
+- HR Applicant → HR Role
+- Partnership Manager Applicant → Partnership Manager Role
+
+Send a DM informing the user of the decision.
+
+==================================================
+ADMIN DASHBOARD
+==================================================
+
+Only users with:
+
+- Ownership Role
+- Developer Role
+
+can access the admin dashboard.
+
+No one else can access admin features.
+
+==================================================
+ADMIN FEATURES
+==================================================
+
+- Open Positions
+- Close Positions
+- Create New Positions
+- Edit Positions
+- Delete Positions
+- Review Applications
+- Accept Applications
+- Deny Applications
+- Configure Role IDs
+- Configure Review Channels
+- View Statistics
+
+==================================================
+OWNERSHIP ROLE
+==================================================
+
+Full Access:
+
+- Manage Everything
+- Add Admins
+- Remove Admins
+- Manage Positions
+- Manage Applications
+- Manage Settings
+
+==================================================
+DEVELOPER ROLE
+==================================================
+
+Full System Access except cannot remove Ownership users.
+
+Can:
+- Manage Website
+- Manage Bot
+- Manage Database
+- Manage Applications
+- Manage Settings
+
+==================================================
+DASHBOARD
+==================================================
+
+Show:
+
+- Open Positions
+- Pending Applications
+- Accepted Applications
+- Denied Applications
+- Total Staff Applications
+
+==================================================
+SECURITY
+==================================================
+
+Implement:
+
+- Discord OAuth2 Verification
+- Permission Checks
+- Input Validation
+- Rate Limiting
+- Secure Sessions
+
+==================================================
+TECH STACK
+==================================================
+
+Frontend:
+- React
+- TypeScript
+- TailwindCSS
+
+Backend:
+- Node.js
+- Express
+- Discord.js
+
+Database:
+- PostgreSQL
+
+==================================================
+FINAL REQUIREMENTS
+==================================================
+
+Generate:
+- Complete frontend
+- Complete backend
+- Discord bot integration
+- PostgreSQL schema
+- API routes
+- Environment variables
+- Installation instructions
+- Mobile responsive design
+
+The website should look modern, professional, and similar to Discord's design language while being fully functional and ready to deploy on Replit.

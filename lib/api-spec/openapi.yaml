@@ -1,22 +1,28 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Discord Staff Application API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Authentication
+  - name: positions
+    description: Staff positions
+  - name: applications
+    description: Staff applications
+  - name: admin
+    description: Admin operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +30,389 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current authenticated user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Log out current user
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Success"
+
+  /positions:
+    get:
+      operationId: listPositions
+      tags: [positions]
+      summary: List all open positions
+      responses:
+        "200":
+          description: List of positions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Position"
+
+  /positions/{id}:
+    get:
+      operationId: getPosition
+      tags: [positions]
+      summary: Get a position by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Position details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Position"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /applications:
+    get:
+      operationId: listMyApplications
+      tags: [applications]
+      summary: List current user's applications
+      responses:
+        "200":
+          description: User's applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Application"
+    post:
+      operationId: createApplication
+      tags: [applications]
+      summary: Submit a new application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationInput"
+      responses:
+        "201":
+          description: Application submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Already applied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /applications/{id}:
+    get:
+      operationId: getApplication
+      tags: [applications]
+      summary: Get an application by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Application details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /applications/stats:
+    get:
+      operationId: getMyStats
+      tags: [applications]
+      summary: Get application statistics for the current user
+      responses:
+        "200":
+          description: User stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserStats"
+
+  /admin/applications:
+    get:
+      operationId: adminListApplications
+      tags: [admin]
+      summary: List all applications (admin)
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: positionId
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: All applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Application"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /admin/applications/{id}/review:
+    patch:
+      operationId: reviewApplication
+      tags: [admin]
+      summary: Accept or deny an application
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewInput"
+      responses:
+        "200":
+          description: Application updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /admin/positions:
+    get:
+      operationId: adminListPositions
+      tags: [admin]
+      summary: List all positions (admin, includes closed)
+      responses:
+        "200":
+          description: All positions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Position"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createPosition
+      tags: [admin]
+      summary: Create a new position
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PositionInput"
+      responses:
+        "201":
+          description: Position created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Position"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /admin/positions/{id}:
+    patch:
+      operationId: updatePosition
+      tags: [admin]
+      summary: Update a position (open/close/edit)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PositionUpdate"
+      responses:
+        "200":
+          description: Position updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Position"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deletePosition
+      tags: [admin]
+      summary: Delete a position
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Success"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /admin/stats:
+    get:
+      operationId: getAdminStats
+      tags: [admin]
+      summary: Get admin dashboard statistics
+      responses:
+        "200":
+          description: Admin statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /admin/settings:
+    get:
+      operationId: getServerSettings
+      tags: [admin]
+      summary: Get server settings
+      responses:
+        "200":
+          description: Server settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerSettings"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      operationId: updateServerSettings
+      tags: [admin]
+      summary: Update server settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServerSettingsUpdate"
+      responses:
+        "200":
+          description: Settings updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerSettings"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +423,285 @@ components:
       required:
         - status
 
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    Success:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+        - success
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        discordId:
+          type: string
+        username:
+          type: string
+        displayName:
+          type: string
+        avatar:
+          type: ["string", "null"]
+        role:
+          type: string
+          description: "user | admin | developer | owner"
+        isMember:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - discordId
+        - username
+        - displayName
+        - avatar
+        - role
+        - isMember
+        - createdAt
+
+    Position:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        isOpen:
+          type: boolean
+        discordRoleId:
+          type: ["string", "null"]
+        questions:
+          type: array
+          items:
+            type: string
+        applicationCount:
+          type: integer
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - isOpen
+        - discordRoleId
+        - questions
+        - applicationCount
+        - createdAt
+
+    PositionInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+        discordRoleId:
+          type: string
+        questions:
+          type: array
+          items:
+            type: string
+        isOpen:
+          type: boolean
+      required:
+        - name
+        - description
+
+    PositionUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        discordRoleId:
+          type: string
+        questions:
+          type: array
+          items:
+            type: string
+        isOpen:
+          type: boolean
+
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+        positionId:
+          type: integer
+        positionName:
+          type: string
+        userId:
+          type: integer
+        applicantUsername:
+          type: string
+        applicantDisplayName:
+          type: string
+        applicantAvatar:
+          type: ["string", "null"]
+        applicantDiscordId:
+          type: string
+        answers:
+          type: object
+          additionalProperties:
+            type: string
+        status:
+          type: string
+          description: "pending | under_review | accepted | denied"
+        staffNote:
+          type: ["string", "null"]
+        showNoteToUser:
+          type: boolean
+        reviewedBy:
+          type: ["string", "null"]
+        submittedAt:
+          type: string
+        reviewedAt:
+          type: ["string", "null"]
+      required:
+        - id
+        - positionId
+        - positionName
+        - userId
+        - applicantUsername
+        - applicantDisplayName
+        - applicantAvatar
+        - applicantDiscordId
+        - answers
+        - status
+        - staffNote
+        - showNoteToUser
+        - reviewedBy
+        - submittedAt
+        - reviewedAt
+
+    ApplicationInput:
+      type: object
+      properties:
+        positionId:
+          type: integer
+        answers:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - positionId
+        - answers
+
+    ReviewInput:
+      type: object
+      properties:
+        status:
+          type: string
+          description: "accepted | denied | under_review"
+        staffNote:
+          type: string
+        showNoteToUser:
+          type: boolean
+      required:
+        - status
+
+    UserStats:
+      type: object
+      properties:
+        total:
+          type: integer
+        pending:
+          type: integer
+        underReview:
+          type: integer
+        accepted:
+          type: integer
+        denied:
+          type: integer
+      required:
+        - total
+        - pending
+        - underReview
+        - accepted
+        - denied
+
+    AdminStats:
+      type: object
+      properties:
+        totalApplications:
+          type: integer
+        pending:
+          type: integer
+        underReview:
+          type: integer
+        accepted:
+          type: integer
+        denied:
+          type: integer
+        openPositions:
+          type: integer
+        totalPositions:
+          type: integer
+        totalApplicants:
+          type: integer
+        recentApplications:
+          type: array
+          items:
+            $ref: "#/components/schemas/Application"
+      required:
+        - totalApplications
+        - pending
+        - underReview
+        - accepted
+        - denied
+        - openPositions
+        - totalPositions
+        - totalApplicants
+        - recentApplications
+
+    ServerSettings:
+      type: object
+      properties:
+        serverName:
+          type: string
+        serverLogo:
+          type: ["string", "null"]
+        guildId:
+          type: string
+        reviewChannelId:
+          type: ["string", "null"]
+        ownerRoleId:
+          type: ["string", "null"]
+        developerRoleId:
+          type: ["string", "null"]
+      required:
+        - serverName
+        - serverLogo
+        - guildId
+        - reviewChannelId
+        - ownerRoleId
+        - developerRoleId
+
+    ServerSettingsUpdate:
+      type: object
+      properties:
+        serverName:
+          type: string
+        serverLogo:
+          type: string
+        reviewChannelId:
+          type: string
+        ownerRoleId:
+          type: string
+        developerRoleId:
+          type: string
