@@ -1,0 +1,100 @@
+added 180 packages, and audited 181 packages in 52s
+/[1G[0K
+/[1G[0K42 packages are looking for funding
+/[1G[0K  run `npm fund` for details
+/[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+/[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K
+up to date, audited 181 packages in 2s
+|[1G[0K
+|[1G[0K42 packages are looking for funding
+|[1G[0K  run `npm fund` for details
+|[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+|[1G[0K\[1G[0K
+> @workspace/api-server@0.0.0 dev
+> NODE_ENV=development npm run build && npm run start
+
+\[1G[0K\[1G[0K
+> @workspace/api-server@0.0.0 build
+> node ./build.mjs
+
+\[1G[0K\[1G[0K|[1G[0K/[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/db"[0m
+
+    src/app.ts:8:21:
+[37m      8 │ import { pool } from [32m"@workspace/db"[37m;
+        ╵                      [32m~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/db" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/db"[0m
+
+    src/lib/discord-bot.ts:6:19:
+[37m      6 │ import { db } from [32m"@workspace/db"[37m;
+        ╵                    [32m~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/db" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[1G[0K-[1G[0K\[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/api-zod"[0m
+
+    src/routes/health.ts:2:36:
+[37m      2 │ import { HealthCheckResponse } from [32m"@workspace/api-zod"[37m;
+        ╵                                     [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/api-zod" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/db"[0m
+
+    src/routes/positions.ts:2:19:
+[37m      2 │ import { db } from [32m"@workspace/db"[37m;
+        ╵                    [32m~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/db" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/db"[0m
+
+    src/routes/servers.ts:2:19:
+[37m      2 │ import { db } from [32m"@workspace/db"[37m;
+        ╵                    [32m~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/db" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/db"[0m
+
+    src/routes/admin.ts:2:19:
+[37m      2 │ import { db } from [32m"@workspace/db"[37m;
+        ╵                    [32m~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/db" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/db"[0m
+
+    src/routes/auth.ts:3:19:
+[37m      3 │ import { db } from [32m"@workspace/db"[37m;
+        ╵                    [32m~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/db" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "@workspace/db"[0m
+
+    src/routes/applications.ts:2:19:
+[37m      2 │ import { db } from [32m"@workspace/db"[37m;
+        ╵                    [32m~~~~~~~~~~~~~~~[0m
+
+  You can mark the path "@workspace/db" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K|[1G[0K/[1G[0K-8 errors
+Error: Build failed with 8 errors:
+src/app.ts:8:21: ERROR: Could not resolve "@workspace/db"
+src/lib/discord-bot.ts:6:19: ERROR: Could not resolve "@workspace/db"
+src/routes/admin.ts:2:19: ERROR: Could not resolve "@workspace/db"
+src/routes/applications.ts:2:19: ERROR: Could not resolve "@workspace/db"
+src/routes/auth.ts:3:19: ERROR: Could not resolve "@workspace/db"
+...
+    at failureErrorWithLog [90m(/home/container/artifacts/api-server/[39mnode_modules/[4mesbuild[24m/lib/main.js:1467:15[90m)[39m
+    at [90m/home/container/artifacts/api-server/[39mnode_modules/[4mesbuild[24m/lib/main.js:926:25
+    at [90m/home/container/artifacts/api-server/[39mnode_modules/[4mesbuild[24m/lib/main.js:1345:9
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m {
+  errors: [36m[Getter/Setter][39m,
+  warnings: [36m[Getter/Setter][39m
+}
