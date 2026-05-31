@@ -1,4 +1,4 @@
-import { spawn, type ChildProcess } from "child_process";
+import { spawn, execSync, type ChildProcess } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -13,6 +13,18 @@ const COLORS = {
 
 function prefix(label: keyof typeof COLORS, line: string): string {
   return `${BOLD}${COLORS[label]}[${label}]${RESET} ${line}`;
+}
+
+function installDeps(label: keyof typeof COLORS, cwd: string): void {
+  const fullCwd = path.join(__dirname, cwd);
+  process.stdout.write(prefix(label, `Installing dependencies in ${cwd}...\n`));
+  try {
+    execSync("npm install", { cwd: fullCwd, stdio: "inherit" });
+    process.stdout.write(prefix(label, `Dependencies installed.\n`));
+  } catch (err) {
+    process.stderr.write(prefix(label, `npm install failed: ${err}\n`));
+    process.exit(1);
+  }
 }
 
 function spawnService(label: keyof typeof COLORS, cwd: string, script: string): ChildProcess {
@@ -44,6 +56,9 @@ function spawnService(label: keyof typeof COLORS, cwd: string, script: string): 
 }
 
 console.log(`${BOLD}Starting Plain Promotions Staff App...${RESET}\n`);
+
+installDeps("api", "artifacts/api-server");
+installDeps("web", "artifacts/staff-app");
 
 const api = spawnService("api", "artifacts/api-server", "dev");
 const web = spawnService("web", "artifacts/staff-app", "dev");

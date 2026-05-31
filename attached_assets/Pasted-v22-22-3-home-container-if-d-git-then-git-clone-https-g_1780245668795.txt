@@ -1,0 +1,100 @@
+v22.22.3
+:/home/container$ if [ ! -d .git ]; then git clone https://github.com/wvwpg67xqw-hub/Application .; fi; if [[ "${AUTO_UPDATE}" == "1" ]]; then git pull; fi; if [ -f /home/container/package.json ]; then npm install; fi; npm install -g ts-node typescript || true; if [ -f /home/container/index.ts ]; then ts-node --esm index.ts; elif [ -f /home/container/src/index.ts ]; then ts-node --esm src/index.ts; else node index.js; fi # Added by FeatherPanel (Server Startup)
+Already up to date.
+\[1G[0K|[1G[0K/[1G[0K-[1G[0K
+up to date, audited 3 packages in 2s
+-[1G[0K
+-[1G[0K1 package is looking for funding
+-[1G[0K  run `npm fund` for details
+-[1G[0K
+found [32m[1m0[22m[39m vulnerabilities
+-[1G[0K\[1G[0K|[1G[0K/[1G[0K-[1G[0K\[1G[0K[1mnpm[22m [31merror[39m [94mcode[39m EROFS
+\[1G[0K[1mnpm[22m [31merror[39m [94msyscall[39m rename
+\[1G[0K[1mnpm[22m [31merror[39m [94mpath[39m /usr/local/lib/node_modules/ts-node
+\[1G[0K[1mnpm[22m [31merror[39m [94mdest[39m /usr/local/lib/node_modules/.ts-node-6zHekdFC
+\[1G[0K[1mnpm[22m [31merror[39m [94merrno[39m [33m-30[39m
+\[1G[0K[1mnpm[22m [31merror[39m [94mrofs[39m EROFS: read-only file system, rename '/usr/local/lib/node_modules/ts-node' -> '/usr/local/lib/node_modules/.ts-node-6zHekdFC'
+\[1G[0K[1mnpm[22m [31merror[39m [94mrofs[39m Often virtualized file systems, or other file systems that don't support symlinks, give this error.
+\[1G[0K[1mnpm[22m [31merror[39m A complete log of this run can be found in: /home/container/.npm/_logs/2026-05-31T16_40_27_492Z-debug-0.log
+\[1G[0K(node:54) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1mStarting Plain Promotions Staff App...[0m
+
+[1m[35m[web][0m > @workspace/staff-app@0.0.0 dev
+[1m[35m[web][0m > npx vite --config vite.config.ts --host 0.0.0.0
+[1m[36m[api][0m > @workspace/api-server@0.0.0 dev
+[1m[36m[api][0m > NODE_ENV=development npm run build && npm run start
+[1m[36m[api][0m > @workspace/api-server@0.0.0 build
+[1m[36m[api][0m > node ./build.mjs
+[1m[36m[api][0m node:internal/modules/package_json_reader:314
+[1m[36m[api][0m   throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+[1m[36m[api][0m         ^
+[1m[36m[api][0m Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'esbuild' imported from /home/container/artifacts/api-server/build.mjs
+[1m[36m[api][0m     at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+[1m[36m[api][0m     at packageResolve (node:internal/modules/esm/resolve:768:81)
+[1m[36m[api][0m     at moduleResolve (node:internal/modules/esm/resolve:855:18)
+[1m[36m[api][0m     at defaultResolve (node:internal/modules/esm/resolve:985:11)
+[1m[36m[api][0m     at #cachedDefaultResolve (node:internal/modules/esm/loader:747:20)
+[1m[36m[api][0m     at ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)
+[1m[36m[api][0m     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)
+[1m[36m[api][0m     at ModuleJob._link (node:internal/modules/esm/module_job:182:49) {
+[1m[36m[api][0m   code: 'ERR_MODULE_NOT_FOUND'
+[1m[36m[api][0m }
+[1m[36m[api][0m Node.js v22.22.3
+[1m[36m[api][0m exited with code 1
+[1m[35m[web][0m vite.config.ts (1:312) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'vite' in vite.config.ts
+[1m[35m[web][0m    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vite.config.ts:1:313 [38;5;246m][0m
+[1m[35m[web][0m    [38;5;246m│[0m
+[1m[35m[web][0m  [38;5;246m1 │[0m [38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m_[0m[38;5;249m_[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249m_[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249mj[0m[38;5;249me[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249md[0m[38;5;249m_[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249ma[0m[38;5;249ml[0m[38;5;249m_[0m[38;5;249md[0m[38;5;249mi[0m[38;5;249mr[0m[38;5;249mn[0m[38;5;249ma[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249m/[0m[38;5;249mh[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m/[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m/[0m[38;5;249ma[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249mi[0m[38;5;249mf[0m[38;5;249ma[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249ms[0m[38;5;249m/[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mf[0m[38;5;249mf[0m[38;5;249m-[0m[38;5;249ma[0m[38;5;249mp[0m[38;5;249mp[0m[38;5;249m"[0m[38;5;249m;[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m_[0m[38;5;249m_[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249m_[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249mj[0m[38;5;249me[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249md[0m[38;5;249m_[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249ma[0m[38;5;249ml[0m[38;5;249m_[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mn[0m[38;5;249ma[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249m/[0m[38;5;249mh[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m/[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m/[0m[38;5;249ma[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249mi[0m[38;5;249mf[0m[38;5;249ma[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249ms[0m[38;5;249m/[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mf[0m[38;5;249mf[0m[38;5;249m-[0m[38;5;249ma[0m[38;5;249mp[0m[38;5;249mp[0m[38;5;249m/[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249m.[0m[38;5;249mt[0m[38;5;249ms[0m[38;5;249m"[0m[38;5;249m;[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m_[0m[38;5;249m_[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249m_[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249mj[0m[38;5;249me[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249md[0m[38;5;249m_[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249ma[0m[38;5;249ml[0m[38;5;249m_[0m[38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m_[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249m_[0m[38;5;249mu[0m[38;5;249mr[0m[38;5;249ml[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249m:[0m[38;5;249m/[0m[38;5;249m/[0m[38;5;249m/[0m[38;5;249mh[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m/[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m/[0m[38;5;249ma[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249mi[0m[38;5;249mf[0m[38;5;249ma[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249ms[0m[38;5;249m/[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mf[0m[38;5;249mf[0m[38;5;249m-[0m[38;5;249ma[0m[38;5;249mp[0m[38;5;249mp[0m[38;5;249m/[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249m.[0m[38;5;249mt[0m[38;5;249ms[0m[38;5;249m"[0m[38;5;249m;[0m[38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0m[38;5;249md[0m[38;5;249me[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249me[0m[38;5;249mC[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m"vite"[38;5;249m;[0m
+[1m[35m[web][0m  [38;5;240m  │[0m                                                                                                                                                                                                                                                                                                                         ───┬──  
+[1m[35m[web][0m  [38;5;240m  │[0m                                                                                                                                                                                                                                                                                                                            ╰──── Module not found, treating it as an external dependency
+[1m[35m[web][0m [38;5;246m───╯[0m
+[1m[35m[web][0m vite.config.ts (2:18) [33m[UNRESOLVED_IMPORT] [0mCould not resolve '@vitejs/plugin-react' in vite.config.ts
+[1m[35m[web][0m    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vite.config.ts:2:19 [38;5;246m][0m
+[1m[35m[web][0m    [38;5;246m│[0m
+[1m[35m[web][0m  [38;5;246m2 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249mr[0m[38;5;249me[0m[38;5;249ma[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m"@vitejs/plugin-react"[38;5;249m;[0m
+[1m[35m[web][0m  [38;5;240m  │[0m                   ───────────┬──────────  
+[1m[35m[web][0m  [38;5;240m  │[0m                              ╰──────────── Module not found, treating it as an external dependency
+[1m[35m[web][0m [38;5;246m───╯[0m
+[1m[35m[web][0m vite.config.ts (3:24) [33m[UNRESOLVED_IMPORT] [0mCould not resolve '@tailwindcss/vite' in vite.config.ts
+[1m[35m[web][0m    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vite.config.ts:3:25 [38;5;246m][0m
+[1m[35m[web][0m    [38;5;246m│[0m
+[1m[35m[web][0m  [38;5;246m3 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mi[0m[38;5;249ml[0m[38;5;249mw[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249md[0m[38;5;249mc[0m[38;5;249ms[0m[38;5;249ms[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m"@tailwindcss/vite"[38;5;249m;[0m
+[1m[35m[web][0m  [38;5;240m  │[0m                         ─────────┬─────────  
+[1m[35m[web][0m  [38;5;240m  │[0m                                  ╰─────────── Module not found, treating it as an external dependency
+[1m[35m[web][0m [38;5;246m───╯[0m
+[1m[35m[web][0m vite.config.ts (5:32) [33m[UNRESOLVED_IMPORT] [0mCould not resolve '@replit/vite-plugin-runtime-error-modal' in vite.config.ts
+[1m[35m[web][0m    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vite.config.ts:5:33 [38;5;246m][0m
+[1m[35m[web][0m    [38;5;246m│[0m
+[1m[35m[web][0m  [38;5;246m5 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249mr[0m[38;5;249mu[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249mi[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249mE[0m[38;5;249mr[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mO[0m[38;5;249mv[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249ml[0m[38;5;249ma[0m[38;5;249my[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m"@replit/vite-plugin-runtime-error-modal"[38;5;249m;[0m
+[1m[35m[web][0m  [38;5;240m  │[0m                                 ────────────────────┬────────────────────  
+[1m[35m[web][0m  [38;5;240m  │[0m                                                     ╰────────────────────── Module not found, treating it as an external dependency
+[1m[35m[web][0m [38;5;246m───╯[0m
+[1m[35m[web][0m vite.config.ts (38:23) [33m[UNRESOLVED_IMPORT] [0mCould not resolve '@replit/vite-plugin-cartographer' in vite.config.ts
+[1m[35m[web][0m     [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vite.config.ts:38:24 [38;5;246m][0m
+[1m[35m[web][0m     [38;5;246m│[0m
+[1m[35m[web][0m  [38;5;246m38 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249ma[0m[38;5;249mw[0m[38;5;249ma[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m([0m"@replit/vite-plugin-cartographer"[38;5;249m)[0m[38;5;249m.[0m[38;5;249mt[0m[38;5;249mh[0m[38;5;249me[0m[38;5;249mn[0m[38;5;249m([0m[38;5;249m([0m[38;5;249mm[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m
+[1m[35m[web][0m  [38;5;240m   │[0m                        ─────────────────┬────────────────  
+[1m[35m[web][0m  [38;5;240m   │[0m                                         ╰────────────────── Module not found, treating it as an external dependency
+[1m[35m[web][0m [38;5;246m────╯[0m
+[1m[35m[web][0m vite.config.ts (43:23) [33m[UNRESOLVED_IMPORT] [0mCould not resolve '@replit/vite-plugin-dev-banner' in vite.config.ts
+[1m[35m[web][0m     [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vite.config.ts:43:24 [38;5;246m][0m
+[1m[35m[web][0m     [38;5;246m│[0m
+[1m[35m[web][0m  [38;5;246m43 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249ma[0m[38;5;249mw[0m[38;5;249ma[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m([0m"@replit/vite-plugin-dev-banner"[38;5;249m)[0m[38;5;249m.[0m[38;5;249mt[0m[38;5;249mh[0m[38;5;249me[0m[38;5;249mn[0m[38;5;249m([0m[38;5;249m([0m[38;5;249mm[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m
+[1m[35m[web][0m  [38;5;240m   │[0m                        ────────────────┬───────────────  
+[1m[35m[web][0m  [38;5;240m   │[0m                                        ╰───────────────── Module not found, treating it as an external dependency
+[1m[35m[web][0m [38;5;246m────╯[0m
+[1m[35m[web][0m failed to load config from /home/container/artifacts/staff-app/vite.config.ts
+[1m[35m[web][0m error when starting dev server:
+[1m[35m[web][0m Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'vite' imported from /home/container/node_modules/.vite-temp/vite.config.ts.timestamp-1780245637303-af506a9221e23.mjs
+[1m[35m[web][0m     at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+[1m[35m[web][0m     at packageResolve (node:internal/modules/esm/resolve:768:81)
+[1m[35m[web][0m     at moduleResolve (node:internal/modules/esm/resolve:855:18)
+[1m[35m[web][0m     at defaultResolve (node:internal/modules/esm/resolve:985:11)
+[1m[35m[web][0m     at #cachedDefaultResolve (node:internal/modules/esm/loader:747:20)
+[1m[35m[web][0m     at ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)
+[1m[35m[web][0m     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)
+[1m[35m[web][0m     at ModuleJob._link (node:internal/modules/esm/module_job:182:49) {
+[1m[35m[web][0m   code: 'ERR_MODULE_NOT_FOUND'
+[1m[35m[web][0m }
+[1m[35m[web][0m exited with code 1
